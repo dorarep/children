@@ -1,23 +1,18 @@
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import React, { Component }     from 'react';
+import { View}                  from 'react-native';
 import { List, ListItem, Icon } from 'react-native-elements';
 import { connect }              from 'react-redux';
 import { executeTask }          from 'children/src/actions';
+import AddIcon                  from 'children/src/atoms/AddIcon';
+import SelectedChild            from 'children/src/organisms/SelectedChild';
+import { formatTasks }          from 'children/src/util';
 
 class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: '手伝うよ！',
       headerRight:
-        <Icon
-          iconStyle={{ marginRight: 10 }}
-          name='add-box'
-          color='#00aced'
+        <AddIcon
           onPress={ () => navigation.navigate('TasksScreen') }
         />,
       headerLeft:
@@ -40,21 +35,12 @@ class HomeScreen extends Component {
   render() {
     return (
       <View>
+        <SelectedChild
+          children={this.props.children}
+          selectedChild={this.props.selectedChild}
+          onPress={ () => this.props.navigation.navigate('ChildrenScreen') } />
         <List>
-          { this.props.children.filter(child => child.id === this.props.selectedChild).map((child, i) => (
-            <ListItem
-              roundAvatar
-              rightIcon={ ( <View /> ) }
-              avatar={child.image ? {uri: child.image} : (<Icon name="accessibility" />)}
-              key={i}
-              title={child.name}
-              subtitle={`${child.point}ポイント`}
-              onPress={ () => this.props.navigation.navigate('ChildrenScreen') }
-            />))
-          }
-        </List>
-        <List>
-          { this.tasks().map((task, i) => (
+          { formatTasks(this.props.tasks, this.props.selectedChild, this.props.works).map((task, i) => (
             <ListItem
               roundAvatar
               rightIcon={ ( <View /> ) }

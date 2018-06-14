@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
-import {
-  Text,
-  View,
-} from 'react-native';
-import { List, ListItem, Icon, Button }    from 'react-native-elements';
+import React, { Component }                from 'react';
+import { View }                            from 'react-native';
+import { Button }                          from 'react-native-elements';
 import { connect }                         from 'react-redux';
 import { updateChild }                     from 'children/src/actions';
+import SelectedChild                       from 'children/src/organisms/SelectedChild';
 
 class SheetScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -23,19 +21,10 @@ class SheetScreen extends Component {
   render() {
     return (
       <View>
-        <List>
-          { this.props.children.filter(child => child.id === this.props.selectedChild).map((child, i) => (
-            <ListItem
-              roundAvatar
-              rightIcon={ ( <View /> ) }
-              avatar={child.image ? {uri: child.image} : (<Icon name="accessibility" />)}
-              key={i}
-              title={child.name}
-              subtitle={`${child.point}ポイント`}
-              onPress={ () => this.props.navigation.navigate('ChildrenScreen') }
-            />))
-          }
-        </List>
+        <SelectedChild
+          children={this.props.children}
+          selectedChild={this.props.selectedChild}
+          onPress={ () => this.props.navigation.navigate('ChildrenScreen') } />
         <Button
           title='リセット'
           style={{ marginTop: 10 }}

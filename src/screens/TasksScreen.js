@@ -4,27 +4,20 @@ import { List, ListItem, Icon }          from 'react-native-elements'
 import { connect }                       from 'react-redux';
 import { deleteTask }                    from 'children/src/actions';
 import Swipeout                          from 'react-native-swipeout';
+import SelectedChild                     from 'children/src/organisms/SelectedChild';
+import AddIcon                           from 'children/src/atoms/AddIcon';
+import { formatTasks }                   from 'children/src/util';
 
 class TasksScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: 'タスク管理',
       headerRight:
-        <Icon
-          iconStyle={{ marginRight: 10 }}
-          name='add-box'
-          color='#00aced'
+        <AddIcon
           onPress={ () => navigation.navigate('WorksScreen') }
         />,
     }
   };
-
-  tasks() {
-    return this.props.tasks.filter(task => task.childId === this.props.selectedChild).map(task => {
-      task.work = this.props.works.reduce((carry, work) => work.id === task.workId ? work : carry);
-      return task;
-    }).sort((a, b) => a.order - b.order);
-  }
 
   render() {
     const swipeout = (task) => [
@@ -36,21 +29,12 @@ class TasksScreen extends Component {
 
     return (
       <View>
+        <SelectedChild
+          children={this.props.children}
+          selectedChild={this.props.selectedChild}
+          onPress={ () => this.props.navigation.navigate('ChildrenScreen') } />
         <List>
-          { this.props.children.filter(child => child.id === this.props.selectedChild).map((child, i) => (
-            <ListItem
-              roundAvatar
-              rightIcon={ ( <View /> ) }
-              avatar={child.image ? {uri: child.image} : (<Icon name="accessibility" />)}
-              key={i}
-              title={child.name}
-              subtitle={`${child.point}ポイント`}
-              onPress={ () => this.props.navigation.navigate('ChildrenScreen') }
-            />))
-          }
-        </List>
-        <List>
-          { this.tasks().map((task, i) => (
+          { formatTasks(this.props.tasks, this.props.selectedChild, this.props.works).map((task, i) => (
             <Swipeout right={swipeout(task)} key={i} autoClose={true} backgroundColor='#fff'>
               <ListItem
                 roundAvatar

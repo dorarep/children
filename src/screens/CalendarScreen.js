@@ -1,17 +1,12 @@
-import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import React, { Component }             from 'react';
+import { View }                         from 'react-native';
 import { Agenda }                       from 'react-native-calendars';
-import { List, ListItem, Icon }         from 'react-native-elements';
+import { ListItem, Icon }               from 'react-native-elements';
 import { connect }                      from 'react-redux';
 import Swipeout                         from 'react-native-swipeout';
 import { deleteTaskLog }                from 'children/src/actions';
 
-class CalendarScreen extends Component {k
+class CalendarScreen extends Component {
   render() {
     const swipeout = (taskLog) => [
       {

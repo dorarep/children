@@ -3,16 +3,14 @@ import { List, ListItem, Icon }          from 'react-native-elements'
 import { connect }                       from 'react-redux';
 import Swipeout                          from 'react-native-swipeout';
 import { addWork, deleteWork, addTask }  from 'children/src/actions';
+import AddIcon                           from 'children/src/atoms/AddIcon';
 
 class WorksScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: '仕事管理',
       headerRight:
-        <Icon
-          iconStyle={{ marginRight: 10 }}
-          name='add-box'
-          color='#00aced'
+        <AddIcon
           onPress={ () => navigation.state.params.addWork() }
         />,
     }
@@ -47,8 +45,9 @@ class WorksScreen extends Component {
               title={work.name}
               subtitle={`${work.point} ポイント`}
               onPress={ () => {
-                this.props.addTask(work.id, this.props.selectedChild); this.props.navigation.goBack()
-              } }
+                this.props.addTask(work.id, this.props.selectedChild);
+                this.props.navigation.goBack()
+              }}
             />
           </Swipeout>
         ))
