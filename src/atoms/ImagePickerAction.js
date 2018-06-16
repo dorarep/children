@@ -39,7 +39,7 @@ export default class ImagePickerAction extends React.Component {
   };
 
   _pickImage = async () => {
-    if (this._askPromise()) {
+    if (await this._askPromise()) {
       const result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
@@ -54,7 +54,7 @@ export default class ImagePickerAction extends React.Component {
   };
 
   _takePhoto = async () => {
-    if (this._askPromise()) {
+    if (await this._askPromise()) {
       let result = await ImagePicker.launchCameraAsync();
 
       if (!result.cancelled) {
