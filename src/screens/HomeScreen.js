@@ -1,13 +1,18 @@
 import React, { Component }     from 'react';
 import { View }                 from 'react-native';
-import { List, ListItem, Icon } from 'react-native-elements';
+import { List, ListItem, Icon, Button } from 'react-native-elements';
 import { connect }              from 'react-redux';
 import { executeTask }          from 'children/src/actions';
 import AddIcon                  from 'children/src/atoms/AddIcon';
+import Star                     from 'children/src/atoms/Star';
 import SelectedChild            from 'children/src/organisms/SelectedChild';
-import { formatTasks }          from 'children/src/util';
+import { formatTasks, isToday } from 'children/src/util';
 
 class HomeScreen extends Component {
+  state = {
+    clickedTask: {},
+  };
+
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: '手伝うよ！',
@@ -25,11 +30,17 @@ class HomeScreen extends Component {
     }
   };
 
-  tasks() {
-    return this.props.tasks.filter(task => task.childId === this.props.selectedChild).map(task => {
-      task.work = this.props.works.reduce((carry, work) => work.id === task.workId ? work : carry);
-      return task;
-    }).sort((a, b) => a.order - b.order);
+  _clickTask(task) {
+    let clickedTask = Object.assign({}, this.state.clickedTask);
+    clickedTask[task.id] = task;
+    this.setState({clickedTask});
+  }
+
+  _executeTask() {
+    Object.keys(this.state.clickedTask).forEach((id) => {
+      this.props.executeTask(this.state.clickedTask[id], this.props.selectedChild)
+    });
+    this.setState({clickedTask: {}})
   }
 
   render() {
@@ -43,15 +54,20 @@ class HomeScreen extends Component {
           { formatTasks(this.props.tasks, this.props.selectedChild, this.props.works).map((task, i) => (
             <ListItem
               roundAvatar
-              rightIcon={ ( <View /> ) }
+              rightIcon={ ( <Star isClicked={isToday(task.finishedDate)} onPress={() => isToday(task.finishedDate) ? null : this._clickTask(task)} /> ) }
               avatar={<Icon name={task.work.icon} />}
               key={i}
               title={task.work.name}
               subtitle={`${task.work.point}ポイント`}
-              onPress={ () => this.props.executeTask(task, this.props.selectedChild) }
             />))
           }
         </List>
+        <Button
+          primary1
+          title='タスク完了'
+          onPress={() => this._executeTask()}
+          style={{marginTop: 30}}
+        />
       </View>
     );
   }
