@@ -1,5 +1,5 @@
 import React, { Component }     from 'react';
-import { View}                  from 'react-native';
+import { View }                 from 'react-native';
 import { List, ListItem, Icon } from 'react-native-elements';
 import { connect }              from 'react-redux';
 import { executeTask }          from 'children/src/actions';

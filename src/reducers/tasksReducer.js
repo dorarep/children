@@ -1,4 +1,6 @@
 import {
+  DELETE_CHILD,
+  DELETE_WORK,
   DELETE_TASK,
   EXECUTE_TASK,
   ADD_TASK,
@@ -30,6 +32,10 @@ const initialTasks = [
 
 export default (state = initialTasks, action) => {
   switch (action.type) {
+    case DELETE_CHILD:
+      return state.filter(task => task.childId !== action.id);
+    case DELETE_WORK:
+      return state.filter(task => task.workId !== action.id);
     case DELETE_TASK:
       return state.filter(task => task.id !== action.id);
     case EXECUTE_TASK:

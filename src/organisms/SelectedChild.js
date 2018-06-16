@@ -1,6 +1,7 @@
 import React                             from 'react';
 import { View }                          from 'react-native';
-import { List, ListItem, Icon }          from 'react-native-elements'
+import { List, ListItem }                from 'react-native-elements'
+import ChildImage                        from 'children/src/atoms/ChildImage';
 
 export default ({ children, selectedChild, onPress }) => {
   return (
@@ -9,7 +10,7 @@ export default ({ children, selectedChild, onPress }) => {
         <ListItem
           roundAvatar
           rightIcon={ ( <View /> ) }
-          avatar={child.image ? {uri: child.image} : (<Icon name="accessibility" />)}
+          avatar={<ChildImage picture={child.picture} style={{width: 64, height: 64}} />}
           key={i}
           title={child.name}
           subtitle={`${child.point}ポイント`}

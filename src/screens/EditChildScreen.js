@@ -1,8 +1,10 @@
 import React, { Component }             from 'react';
-import { View }                         from 'react-native';
+import { View, Image, Dimensions }      from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements'
 import { connect }                      from 'react-redux';
 import { updateChild }                  from 'children/src/actions';
+import ImagePickerAction                from 'children/src/atoms/ImagePickerAction';
+import ChildImage                       from 'children/src/atoms/ChildImage';
 
 class EditChildScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -21,8 +23,20 @@ class EditChildScreen extends Component {
   }
 
   render() {
+    const dimensions = Dimensions.get('window');
+    const imageWidth = dimensions.width;
+
     return (
       <View>
+        <ImagePickerAction
+          onSelected={(picture) => {
+            const child = Object.assign({}, this.state.child);
+            child.picture = picture;
+            this.setState({child})
+          }}>
+          <ChildImage picture={this.state.child.picture} style={{width: imageWidth, height: imageWidth}} />
+        </ImagePickerAction>
+
         <FormLabel>名前</FormLabel>
         <FormInput
           value={this.state.child.name}

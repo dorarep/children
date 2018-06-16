@@ -3,6 +3,7 @@ import Swipeout                               from 'react-native-swipeout';
 import { List, ListItem, Icon, Input }        from 'react-native-elements'
 import { connect }                            from 'react-redux';
 import { addChild, deleteChild, selectChild } from 'children/src/actions';
+import ChildImage                             from 'children/src/atoms/ChildImage';
 
 class ChildrenScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -43,7 +44,7 @@ class ChildrenScreen extends Component {
               <Swipeout right={swipeout(child)} key={i} autoClose={true} backgroundColor={this.props.selectedChild === child.id ? "#fff" : "#EEE"}>
                 <ListItem
                   roundAvatar
-                  avatar={child.image ? {uri: child.image} : (<Icon name="accessibility" />)}
+                  avatar={<ChildImage picture={child.picture} style={{width: 64, height: 64}} />}
                   key={i}
                   title={child.name}
                   subtitle={`${child.point}ポイント`}

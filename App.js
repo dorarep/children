@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import RootNavigator        from 'children/src/navigators/RootNavigator';
-import { YellowBox }        from 'react-native';
-import { Provider }         from 'react-redux';
-import configureStore       from 'children/src/stores';
-import { PersistGate }      from 'redux-persist/integration/react';
+import React, { Component }    from 'react';
+import RootNavigator           from 'children/src/navigators/RootNavigator';
+import { YellowBox }           from 'react-native';
+import { Provider }            from 'react-redux';
+import configureStore          from 'children/src/stores';
+import { PersistGate }         from 'redux-persist/integration/react';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
@@ -14,7 +15,9 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <RootNavigator />
+          <ActionSheetProvider>
+            <RootNavigator />
+          </ActionSheetProvider>
         </PersistGate>
       </Provider>
     );
