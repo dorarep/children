@@ -1,4 +1,5 @@
 import React, { Component }                   from 'react';
+import { ScrollView }                         from 'react-native';
 import Swipeout                               from 'react-native-swipeout';
 import { List, ListItem, Icon, Input }        from 'react-native-elements'
 import { connect }                            from 'react-redux';
@@ -38,6 +39,7 @@ class ChildrenScreen extends Component {
     ];
 
     return (
+      <ScrollView>
         <List>
           {
             this.props.children.map((child, i) => (
@@ -54,6 +56,7 @@ class ChildrenScreen extends Component {
             ))
           }
         </List>
+      </ScrollView>
     );
   }
 }

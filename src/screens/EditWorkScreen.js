@@ -1,8 +1,9 @@
-import React, { Component }                     from 'react';
-import { View, ScrollView, TouchableHighlight } from 'react-native';
-import { FormLabel, FormInput, Button, Icon }   from 'react-native-elements';
-import { connect }                              from 'react-redux';
-import { updateWork }                           from 'children/src/actions';
+import React, { Component }                            from 'react';
+import { View, ScrollView, TouchableHighlight, Image } from 'react-native';
+import { FormLabel, FormInput, Button, Icon }          from 'react-native-elements';
+import { connect }                                     from 'react-redux';
+import { updateWork }                                  from 'children/src/actions';
+import { workIconImages }                              from 'children/src/util';
 
 class EditWorkScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -28,6 +29,12 @@ class EditWorkScreen extends Component {
       'favorite',
     ];
 
+    const boxStyle = {
+      borderRadius: 6,
+      borderWidth: 4,
+      borderColor: '#68a0cf',
+    };
+
     return (
       <View>
         <FormLabel>名前</FormLabel>
@@ -41,14 +48,15 @@ class EditWorkScreen extends Component {
         />
         <FormLabel>アイコン</FormLabel>
         <ScrollView horizontal={true} style={{ paddingHorizontal: 20 }}>
-          {icons.map((icon, i) => (
+          {workIconImages.map((icon, i) => (
             <TouchableHighlight key={i} onPress={() => {
               const work = Object.assign({}, this.state.work);
-              work.icon = icon;
+              work.icon = i;
               this.setState({work})
             }}>
-              <Icon name={icon}
-                    color={icon === this.state.work.icon ? '#f50' : '#517fa4'}/>
+              <View style={i === this.state.work.icon ? boxStyle : {}}>
+                <Image source={icon} />
+              </View>
             </TouchableHighlight>
           ))}
         </ScrollView>

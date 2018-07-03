@@ -1,11 +1,12 @@
 import React, { Component }              from 'react';
-import { View }                          from 'react-native';
+import { View, ScrollView }              from 'react-native';
 import { List, ListItem, Icon }          from 'react-native-elements'
 import { connect }                       from 'react-redux';
 import { deleteTask }                    from 'children/src/actions';
 import Swipeout                          from 'react-native-swipeout';
 import SelectedChild                     from 'children/src/organisms/SelectedChild';
 import AddIcon                           from 'children/src/atoms/AddIcon';
+import WorkIcon                          from 'children/src/atoms/WorkIcon';
 import { formatTasks }                   from 'children/src/util';
 
 class TasksScreen extends Component {
@@ -33,19 +34,21 @@ class TasksScreen extends Component {
           children={this.props.children}
           selectedChild={this.props.selectedChild}
           onPress={ () => this.props.navigation.navigate('ChildrenScreen') } />
-        <List>
-          { formatTasks(this.props.tasks, this.props.selectedChild, this.props.works).map((task, i) => (
-            <Swipeout right={swipeout(task)} key={i} autoClose={true} backgroundColor='#fff'>
-              <ListItem
-                roundAvatar
-                avatar={<Icon name={task.work.icon} />}
-                title={task.work.name}
-                subtitle={`${task.work.point}ポイント`}
-              />
-            </Swipeout>
-          ))
-          }
-        </List>
+        <ScrollView>
+          <List>
+            { formatTasks(this.props.tasks, this.props.selectedChild, this.props.works).map((task, i) => (
+              <Swipeout right={swipeout(task)} key={i} autoClose={true} backgroundColor='#fff'>
+                <ListItem
+                  roundAvatar
+                  avatar={<WorkIcon work={task.work} />}
+                  title={task.work.name}
+                  subtitle={`${task.work.point}ポイント`}
+                />
+              </Swipeout>
+            ))
+            }
+          </List>
+        </ScrollView>
       </View>
     );
   }
@@ -54,8 +57,8 @@ class TasksScreen extends Component {
 const mapStateToProps = state => ({
   selectedChild: state.selectedChild,
   children:      state.children,
-  tasks: state.tasks,
-  works: state.works,
+  tasks:         state.tasks,
+  works:         state.works,
 });
 
 const mapDispatchToProps = {

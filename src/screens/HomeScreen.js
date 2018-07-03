@@ -1,5 +1,5 @@
 import React, { Component }     from 'react';
-import { View }                 from 'react-native';
+import { View, ScrollView }     from 'react-native';
 import { List, ListItem, Icon, Button } from 'react-native-elements';
 import { connect }              from 'react-redux';
 import { executeTask }          from 'children/src/actions';
@@ -7,6 +7,7 @@ import AddIcon                  from 'children/src/atoms/AddIcon';
 import Star                     from 'children/src/atoms/Star';
 import SelectedChild            from 'children/src/organisms/SelectedChild';
 import { formatTasks, isToday } from 'children/src/util';
+import WorkIcon                 from 'children/src/atoms/WorkIcon';
 
 class HomeScreen extends Component {
   state = {
@@ -43,24 +44,26 @@ class HomeScreen extends Component {
           children={this.props.children}
           selectedChild={this.props.selectedChild}
           onPress={ () => this.props.navigation.navigate('ChildrenScreen') } />
-        <List>
-          { formatTasks(this.props.tasks, this.props.selectedChild, this.props.works).map((task, i) => (
-            <ListItem
-              roundAvatar
-              rightIcon={ ( <Star isClicked={isToday(task.finishedDate)} onPress={() => isToday(task.finishedDate) ? null : this._clickTask(task)} /> ) }
-              avatar={<Icon name={task.work.icon} />}
-              key={i}
-              title={task.work.name}
-              subtitle={`${task.work.point}ポイント`}
-            />))
-          }
-        </List>
-        <Button
-          primary1
-          title='タスク完了'
-          onPress={() => this._executeTask()}
-          style={{marginTop: 30}}
-        />
+        <ScrollView>
+          <List>
+            { formatTasks(this.props.tasks, this.props.selectedChild, this.props.works).map((task, i) => (
+              <ListItem
+                roundAvatar
+                rightIcon={ ( <Star isClicked={isToday(task.finishedDate)} onPress={() => isToday(task.finishedDate) ? null : this._clickTask(task)} /> ) }
+                avatar={<WorkIcon work={task.work} />}
+                key={i}
+                title={task.work.name}
+                subtitle={`${task.work.point}ポイント`}
+              />))
+            }
+          </List>
+          <Button
+            primary1
+            title='タスク完了'
+            onPress={() => this._executeTask()}
+            style={{marginTop: 30, marginBottom: 150}}
+          />
+        </ScrollView>
       </View>
     );
   }

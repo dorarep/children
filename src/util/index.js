@@ -28,3 +28,18 @@ export const generateUuid = () => {
   }
   return chars.join("");
 };
+
+export const workIconImages = [
+  require('children/assets/images/works/0.png'),
+  require('children/assets/images/works/1.png'),
+  require('children/assets/images/works/2.png'),
+  require('children/assets/images/works/3.png'),
+  require('children/assets/images/works/4.png'),
+  require('children/assets/images/works/5.png'),
+  require('children/assets/images/works/6.png'),
+  require('children/assets/images/works/7.png'),
+  require('children/assets/images/works/8.png'),
+  require('children/assets/images/works/9.png'),
+  require('children/assets/images/works/10.png'),
+  require('children/assets/images/works/11.png')
+];

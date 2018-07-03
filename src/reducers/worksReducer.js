@@ -8,62 +8,62 @@ const initialWorks = [
   {
     id: 0,
     name: '手洗い',
-    icon: 'delete',
+    icon: 5,
     point: 3,
   }, {
     id: 1,
     name: '歯磨き',
-    icon: 'delete',
+    icon: 6,
     point: 3,
   }, {
     id: 2,
     name: '勉強',
-    icon: 'delete',
+    icon: 0,
     point: 3,
   }, {
     id: 3,
     name: '洗顔物干し',
-    icon: 'face',
+    icon: 7,
     point: 3,
   }, {
     id: 4,
     name: 'おつかい',
-    icon: 'shop',
+    icon: 2,
     point: 3,
   }, {
     id: 5,
     name: 'お料理',
-    icon: 'delete',
+    icon: 3,
     point: 3,
   }, {
     id: 6,
     name: 'おそうじ',
-    icon: 'delete',
+    icon: 1,
     point: 3,
   }, {
     id: 7,
     name: 'お風呂洗い',
-    icon: 'delete',
+    icon: 4,
     point: 3,
   }, {
     id: 8,
     name: 'トイレ掃除',
-    icon: 'delete',
+    icon: 8,
     point: 3,
   }, {
     id: 9,
     name: 'ゴミ捨て',
-    icon: 'delete',
+    icon: 9,
     point: 3,
   }, {
     id: 10,
     name: '水やり',
-    icon: 'delete',
+    icon: 10,
     point: 3,
   }, {
     id: 11,
     name: 'ベッドメイキング',
-    icon: 'delete',
+    icon: 11,
     point: 3,
   },
 ];
@@ -77,8 +77,8 @@ export default (state = initialWorks, action) => {
         ...state,
         {
           id:    new Date().getTime(),
-          name:  '新しい作業',
-          icon:  'label',
+          name:  'やること',
+          icon:  0,
           point: 3,
         },
       ];

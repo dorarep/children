@@ -1,9 +1,11 @@
 import React, { Component }              from 'react';
+import { ScrollView }                    from 'react-native';
 import { List, ListItem, Icon }          from 'react-native-elements'
 import { connect }                       from 'react-redux';
 import Swipeout                          from 'react-native-swipeout';
 import { addWork, deleteWork, addTask }  from 'children/src/actions';
 import AddIcon                           from 'children/src/atoms/AddIcon';
+import WorkIcon                          from 'children/src/atoms/WorkIcon';
 
 class WorksScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -35,24 +37,26 @@ class WorksScreen extends Component {
     ];
 
     return (
-      <List>
-        { this.props.works.map((work, i) => (
-          <Swipeout right={swipeout(work)} key={i} autoClose={true} backgroundColor='#fff'>
-            <ListItem
-              roundAvatar
-              avatar={(<Icon name={work.icon} />)}
-              key={i}
-              title={work.name}
-              subtitle={`${work.point} ポイント`}
-              onPress={ () => {
-                this.props.addTask(work.id, this.props.selectedChild);
-                this.props.navigation.goBack()
-              }}
-            />
-          </Swipeout>
-        ))
-        }
-      </List>
+      <ScrollView>
+        <List>
+          { this.props.works.map((work, i) => (
+            <Swipeout right={swipeout(work)} key={i} autoClose={true} backgroundColor='#fff'>
+              <ListItem
+                roundAvatar
+                avatar={(<WorkIcon work={work} />)}
+                key={i}
+                title={work.name}
+                subtitle={`${work.point} ポイント`}
+                onPress={ () => {
+                  this.props.addTask(work.id, this.props.selectedChild);
+                  this.props.navigation.goBack()
+                }}
+              />
+            </Swipeout>
+          ))
+          }
+        </List>
+      </ScrollView>
     );
   }
 }
