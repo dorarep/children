@@ -8,7 +8,7 @@ import ChildImage                             from 'children/src/atoms/ChildImag
 class ChildrenScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: '子供管理',
+      headerTitle: 'こども管理',
       headerRight:
         <Icon
           iconStyle={{ marginRight: 10 }}

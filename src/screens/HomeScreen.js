@@ -20,13 +20,6 @@ class HomeScreen extends Component {
         <AddIcon
           onPress={ () => navigation.navigate('TasksScreen') }
         />,
-      headerLeft:
-        <Icon
-          iconStyle={{ marginLeft: 10 }}
-          name='people'
-          color='#00aced'
-          onPress={ () => navigation.navigate('ChildrenScreen')}
-        />,
     }
   };
 

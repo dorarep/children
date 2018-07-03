@@ -11,7 +11,7 @@ import { formatTasks }                   from 'children/src/util';
 class TasksScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: 'タスク管理',
+      headerTitle: '今日やること',
       headerRight:
         <AddIcon
           onPress={ () => navigation.navigate('WorksScreen') }

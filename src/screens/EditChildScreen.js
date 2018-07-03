@@ -9,7 +9,7 @@ import ChildImage                       from 'children/src/atoms/ChildImage';
 class EditChildScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: '子供編集',
+      headerTitle: 'こども編集',
     }
   };
 

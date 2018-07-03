@@ -8,7 +8,7 @@ import AddIcon                           from 'children/src/atoms/AddIcon';
 class WorksScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: '仕事管理',
+      headerTitle: 'やること一覧',
       headerRight:
         <AddIcon
           onPress={ () => navigation.state.params.addWork() }

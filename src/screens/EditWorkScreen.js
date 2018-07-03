@@ -7,7 +7,7 @@ import { updateWork }                           from 'children/src/actions';
 class EditWorkScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: '仕事編集',
+      headerTitle: 'やること編集',
     }
   };
 

@@ -7,7 +7,7 @@ import {
 
 const defaultChild = [{
   id: 0,
-  name: '子供',
+  name: 'たろう',
   picture: null,
   point: 0,
 }];
@@ -19,7 +19,7 @@ export default (state = defaultChild, action) => {
         ...state,
         {
           id: new Date().getTime(),
-          name: '新しい子供',
+          name: '新しいこども',
           picture: null,
           point: 0,
         },
